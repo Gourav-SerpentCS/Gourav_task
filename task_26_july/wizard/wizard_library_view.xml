@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        <record id="library_books_details_wizard_view" model="ir.ui.view">
+            <field name="name">library.books.details.form.view</field>
+            <field name="model">library.books.data</field>
+            <field name="arch" type="xml">
+                <form string="Library Books History">
+                    <sheet>
+                        <group>
+                            <field name='book_id'/>
+                            <field name='partner_id'/>
+                            <field name='date'/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name='book_issue_detail' string="Save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_library_book_details" model="ir.actions.act_window">
+            <field name="name">Library Books Details</field>
+            <field name='res_model'>library.books.data</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="library_books_details_wizard_view"/>
+            
+            <field name="target">new</field>
+        </record>
+
+        <!-- wizard 2 -->
+        <!-- <record id="release_book_wizard_view" model="ir.ui.view">
+            <field name="name">release.book.details.form.view</field>
+            <field name="model">library.books.data</field>
+            <field name="arch" type="xml">
+                <form string="Library Books History">
+                    <sheet>
+                        <group>
+                            <field name='book_id'/>
+                            <field name='partner_id'/>
+                            <field name='date'/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name='book_return_detail' string="Save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_library_book_release_details" model="ir.actions.act_window">
+            <field name="name">Library Books Details</field>
+            <field name='res_model'>library.books.data</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="release_book_wizard_view"/>
+            <field name="target">new</field>
+        </record> -->
+    </data>
+</odoo>

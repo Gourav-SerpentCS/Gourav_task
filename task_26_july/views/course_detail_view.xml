@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+<!-- form view start here -->
+            <record id="course_detail_form_view" model="ir.ui.view">
+                <field name="name">course.detail.form.view</field>
+                <field name="model">courses.detail</field>
+                <field name='arch' type='xml'>
+                    <form string='Course Details'>
+                    <header>
+                        <button string="Confirm" name="action_confirm" type="object" class="btn-primary"/> 
+                        <button string="Cancel" name="action_cancel" type="object" class="btn-danger"/>
+                        <!-- <button string="Print" name= '%(action_report_course_details)d' type="action"  class="btn-info"/> -->
+                        <!-- <button string="Print" name="course_detail" type="object" context="{'print_report':'print'}" class="btn-info"/> -->
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                        <sheet>
+                            <group>
+                                <field name='course'/>
+                                <field name='instructor_ids'/>
+                                <field name='room_id'/>
+                            </group>
+                            <notebook>
+                                <page string="Attendees Detail" name='details'>
+                                   <field name='attendees_ids'/><!-- widget="many2many_tags" -->
+                                </page>
+                            </notebook>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+<!-- inherit view res.partner -->
+        <record id="view_res_partner_form_extend" model="ir.ui.view">
+                <field name="name">view.res.partner.form.extend</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name='arch' type='xml'>
+                    <!-- <xpath expr="//notebook/group[2]/field[@name='property_payment_method_id']" position="after"> -->
+                    <field name="industry_id" position="after">
+                        <field name='instructor'/>
+                        <field name='course_ids' widget='many2many_tags'/>
+                    <!-- </xpath> -->
+                    </field>
+                </field>
+            </record>
+<!-- inherit ends -->
+        
+<!-- tree or list view start here -->
+        <record id="course_details_tree_view" model="ir.ui.view">
+                <field name="name">course.details.tree.view</field>
+                <field name="model">courses.detail</field>
+                <field name='arch' type='xml'>
+                    <tree string='Course Details'>
+                        <field name="course"/>
+                        <field name='instructor_ids' widget="many2many_tags"/>
+                        <field name='room_id'/>
+                        <field name='attendees_ids' widget="many2many_tags"/>
+                    </tree>
+                </field>
+        </record>
+<!-- tree view ends -->
+
+<!-- search view start -->
+        <record id="course_search_view" model="ir.ui.view">                                
+            <field name="name">course.search.view</field>                                
+            <field name="model">courses.detail</field>                                
+            <field name="arch" type="xml">                                    
+                <search string="Search Instructor">                                        
+                    <field name="instructor_ids"></field>                                        
+                    <group expand="0" string="Group By">                                            
+                        <filter string="Instructor" name="instructor_ids" context="{'group_by': 'instructor_ids'}"></filter>                          
+                    </group>                                    
+                </search>                                
+            </field>                            
+        </record>
+<!-- search view ends -->
+
+ 
+<!-- action required -->
+        <record id="action_course_details" model="ir.actions.act_window">
+            <field name="name">Course Data</field>
+            <field name='res_model'>courses.detail</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+ <!-- action created -->
+
+
+<!-- table 2 start -->
+        <record id="attendees_detail_form_view" model="ir.ui.view">
+            <field name="name">attendees.detail.form.view</field>
+            <field name="model">attendees.data</field>
+            <field name='arch' type='xml'>
+                <form string='Course Details'>
+                    <header>
+                        <button string="Courses" name="course_detail" type="object" context="{'open_action':'course'}" class="btn-primary"/>
+                        <button string="Room details" name="course_detail" type="object" context="{'open_action':'room'}" class="btn-primary"/>
+                        <button string="Print" name="course_detail" type="object" context="{'print_report':'print'}" class="btn-info"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="attendees_detail_tree_view" model="ir.ui.view">
+                <field name="name">attendees.detail.tree.view</field>
+                <field name="model">attendees.data</field>
+                <field name='arch' type='xml'>
+                    <tree string='Attendees Data'>
+                        <field name="partner_id"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="action_attendees_detail" model="ir.actions.act_window">
+            <field name="name">Attendees Data</field>
+            <field name='res_model'>attendees.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+<!-- table 2 ends -->
+
+
+                      
+        <menuitem id='courses_main_id'
+                name='Courses'
+                sequence='2'/>
+
+<!-- sub menu -->
+        <menuitem id="attendees_detail_menu"
+                action="action_attendees_detail"
+                parent="course_details_menu"  sequence='2'/>
+
+        <menuitem id="course_details_menu_id"
+                action="action_course_details"
+                parent="course_details_menu"  sequence='1'/>
+<!-- sub menu ends -->
+
+        <menuitem id="course_details_menu"
+                action="action_course_details"
+                parent="courses_main_id"  sequence='1'/>
+
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_course_details,access_course_data,model_courses_detail,base.group_user,1,1,1,1
+access_room_details,access_room_data,model_room_detail,base.group_user,1,1,1,1
+access_attendees_details,access_attendees_data,model_attendees_data,base.group_user,1,1,1,1
+access_course_data,access_course_data,model_course_data,base.group_user,1,1,1,1
+access_book_details,access_book_details,model_books_detail,base.group_user,1,1,1,1
+access_library_details,access_library_details,model_library_data,base.group_user,1,1,1,1       
+access_book_history,access_book_history,model_book_history,base.group_user,1,1,1,1
+access_library_books_data,access_library_books_data,model_library_books_data,base.group_user,1,1,1,1

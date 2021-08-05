@@ -1,0 +1,155 @@
+<odoo>
+    <data>
+<!-- form view start here -->
+            <record id="books_detail_form_view" model="ir.ui.view">
+                <field name="name">books.detail.form.view</field>
+                <field name="model">books.detail</field>
+                <field name='arch' type='xml'>
+                    <form string='Book Details'>
+                        <sheet>
+                            <group>
+                                <div class='oe_title'>
+                                    <field name='book' placeholder="Book Name"/>
+                                </div>
+                            </group>
+                            <notebook>
+                                <page string="History" name='details'>
+                                    <field name='book_history_ids' readonly='1'/>
+                                </page>
+                            </notebook>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+<!-- tree or list view start here -->
+        <record id="books_details_tree_view" model="ir.ui.view">
+                <field name="name">book.details.tree.view</field>
+                <field name="model">books.detail</field>
+                <field name='arch' type='xml'>
+                    <tree string='Book Details'>
+                        <field name='book'/>
+                        <field name='book_history_ids'/>
+                    </tree>
+                </field>
+        </record>
+<!-- tree view ends -->
+
+ 
+<!-- action required -->
+        <record id="action_book_details" model="ir.actions.act_window">
+            <field name="name">Book Details</field>
+            <field name='res_model'>books.detail</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+ <!-- action created -->
+
+<!-- table 2 start here -->
+
+        <record id="library_detail_form_view" model="ir.ui.view">
+                <field name="name">library.detail.form.view</field>
+                <field name="model">library.data</field>
+                <field name='arch' type='xml'>
+                    <form string='Library Details'>
+                        <header>
+                            <button name="%(action_library_book_details)d" string="Issue On" type="action" context="{'issue_button':'issue date'}" class="btn-primary"/>
+                            <button name="%(action_library_book_details)d" string="Release On" type="action" context="{'return_button':'return date'}" class="btn-info"/> 
+                        </header>
+                    
+                        <sheet>
+                            <group>
+                                <div class='oe_title'>
+                                    <field name='library_name' placeholder="Name"/>
+                                </div>
+                            </group>
+                            <notebook>
+                                <page string="Library Details" name='details'>
+                                    <field name='books_data_ids'/>
+                                </page>
+                            </notebook>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+<!-- tree or list view start here -->
+        <record id="library_details_tree_view" model="ir.ui.view">
+                <field name="name">library.details.tree.view</field>
+                <field name="model">library.data</field>
+                <field name='arch' type='xml'>
+                    <tree string='Library Details'>
+                        <field name='library_name'/>
+                        <field name='books_data_ids'/>
+                    </tree>
+                </field>
+        </record>
+
+
+        <record id="action_library_details" model="ir.actions.act_window">
+            <field name="name">Library Details</field>
+            <field name='res_model'>library.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--table 2 ends -->
+
+<!-- table 3 start -->
+
+        <record id="book_history_form_view" model="ir.ui.view">
+                <field name="name">book.history.form.view</field>
+                <field name="model">book.history</field>
+                <field name='arch' type='xml'>
+                    <form string='Book History'>
+                        <sheet>
+                            <group>
+                                <field name='book_id'/>
+                                <field name='partner_id'/>
+                            </group>
+                            <group>
+                                <field name='issue_on'/>
+                                <field name='return_date'/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+<!-- tree or list view start here -->
+        <record id="book_history_tree_view" model="ir.ui.view">
+                <field name="name">book.history.tree.view</field>
+                <field name="model">book.history</field>
+                <field name='arch' type='xml'>
+                    <tree string='Book History'>
+                        <field name='partner_id'/>
+                        <field name='issue_on'/>
+                        <field name='return_date'/>
+                        <field name='book_id'/>
+                    </tree>
+                </field>
+        </record>
+
+<!-- action required -->
+        <record id="action_book_history_details" model="ir.actions.act_window">
+            <field name="name">Book History</field>
+            <field name='res_model'>book.history</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+<!-- action created -->
+<!-- table 3 ends -->
+
+<!-- sub menu -->
+        <menuitem id="book_details_menu_id"
+            action="action_book_details"
+            parent="library_menu_id"  sequence='1'/>
+
+        <menuitem id="library_detail_menu"
+            action="action_library_details"
+            parent="library_menu_id"  sequence='2'/>
+
+        <menuitem id="book_history_detail_menu"
+            action="action_book_history_details"
+            parent="library_menu_id"  sequence='3'/>    
+<!-- sub menu ends -->
+        <menuitem id= "library_menu_id"
+            action="action_book_details"
+            parent="courses_main_id"  sequence='3'/>
+
+    </data>
+</odoo>

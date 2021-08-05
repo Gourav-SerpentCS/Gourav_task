@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+<!-- form view start here -->
+            <record id="rooms_detail_form_view" model="ir.ui.view">
+                <field name="name">rooms.detail.form.view</field>
+                <field name="model">room.detail</field>
+                <field name='arch' type='xml'>
+                    <form string='Room Details'>
+                        <header>
+                            <button name="%(action_course_data)d" string="Room details" type="action" class="btn-info"/>
+                        </header>
+                        <sheet>
+                            <group>
+                                <field name='location'/>
+                                <field name='session'/>
+                                <field name='capacity'/>
+                                <field name='room' readonly="False" force_save='1'/>
+                                <field name='room_name' readonly="False"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+<!-- tree or list view start here -->
+        <record id="room_details_tree_view" model="ir.ui.view">
+                <field name="name">room.details.tree.view</field>
+                <field name="model">room.detail</field>
+                <field name='arch' type='xml'>
+                    <tree string='Room Details'>
+                        <field name='location'/>
+                        <field name='session'/>
+                        <field name='capacity'/>
+                        <field name='room' readonly="False" force_save='1'/>
+                        <field name='room_name' readonly="False"/>
+                    </tree>
+                </field>
+        </record>
+<!-- tree view ends -->
+
+ 
+<!-- action required -->
+        <record id="action_room_details" model="ir.actions.act_window">
+            <field name="name">Room Data</field>
+            <field name='res_model'>room.detail</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+ <!-- action created -->
+
+            <menuitem id="room_details_menu"
+                action="action_room_details"
+                parent="courses_main_id"  sequence='2'/>
+
+    </data>
+</odoo>

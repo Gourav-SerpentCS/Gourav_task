@@ -1,0 +1,11 @@
+<odoo>
+    <record id="action_report_course_details" model="ir.actions.report">
+        <field name="name">Course Details</field>
+        <field name="model">courses.detail</field>
+        <field name="binding_model_id" ref="model_courses_detail"/>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">task_26_july.report_course_detail_template</field>
+        <field name="report_file">task_26_july.report_course_detail_template</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="course_detail_wizard_view" model="ir.ui.view">
+            <field name="name">course.detail.form.view</field>
+            <field name="model">course.data</field>
+            <field name="arch" type="xml">
+                <form string="Course Data">
+                    <sheet>
+                        <group>
+                            <field name='room'/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name='course_details' string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_course_data" model="ir.actions.act_window">
+            <field name="name">Course Data</field>
+            <field name='res_model'>course.data</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="course_detail_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
